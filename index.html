@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conversor Masivo de XML (CFDI) a Excel</title>
+    <meta name="description"
+        content="Convierte tus facturas XML del SAT (CFDI 4.0, 3.3 y Retenciones) a Excel (.xlsx).">
+
+    <!-- Google Fonts: Outfit -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/CSS/main.css">
+    <link rel="stylesheet" href="/CSS/questions.css">
+</head>
+
+<body>
+
+    <header class="navbar">
+        <a href="https://brus0809.github.io" class="logo">
+            <span class="bracket">&lt;</span>
+            <span class="letters">BMS</span>
+            <span class="bracket">/&gt;</span>
+        </a>
+    </header>
+
+    <!-- ADSENSE CONTAINER: TOP BANNER -->
+    <div class="adsense-placeholder top-banner">
+        <div class="adsense-label">PUBLICIDAD (Google AdSense - Banner Horizontal 728x90)</div>
+        <!-- Reemplaza esta caja por tu código de anuncio de Google AdSense -->
+        <ins class="adsbygoogle" style="display:inline-block;width:728px;height:90px"
+            data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="XXXXXXXXXX"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+    </div>
+
+    <div class="app-container">
+        <!-- Header Section -->
+        <header class="app-header">
+            <div class="logo-area">
+
+                <svg class="logo-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" aria-hidden="true">
+
+                    <path fill="currentColor"
+                        d="M128 128C128 92.7 156.7 64 192 64L341.5 64C358.5 64 374.8 70.7 386.8 82.7L493.3 189.3C505.3 201.3 512 217.6 512 234.6L512 512C512 547.3 483.3 576 448 576L192 576C156.7 576 128 547.3 128 512L128 128zM336 122.5L336 216C336 229.3 346.7 240 360 240L453.5 240L336 122.5zM292 330.7C284.6 319.7 269.7 316.7 258.7 324C247.7 331.3 244.7 346.3 252 357.3L291.2 416L252 474.7C244.6 485.7 247.6 500.6 258.7 508C269.8 515.4 284.6 512.4 292 501.3L320 459.3L348 501.3C355.4 512.3 370.3 515.3 381.3 508C392.3 500.7 395.3 485.7 388 474.7L348.8 416L388 357.3C395.4 346.3 392.4 331.4 381.3 324C370.2 316.6 355.4 319.6 348 330.7L320 372.7L292 330.7z" />
+                </svg>
+
+                <span class="logo-text">
+                    XML<span class="accent-text">2</span>Excel
+                </span>
+
+            </div>
+            <h1 class="main-title">Convierte tus XMLs del SAT a Excel en segundos</h1>
+            <p class="subtitle">Sube tus archivos XML individuales o un archivo ZIP. Procesamos CFDIs de Emisión
+                (Ingresos, Gastos, Pagos) y Retenciones. 100% Gratis.</p>
+        </header>
+
+        <!-- Main Conversion Card -->
+        <main class="main-card">
+            <div class="upload-zone" id="drop-zone">
+                <input type="file" id="file-input" multiple accept=".xml,.zip" class="file-input-hidden">
+
+                <div class="upload-icon-container">
+                    <svg class="upload-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640"
+                        aria-hidden="true">
+
+                        <path fill="currentColor"
+                            d="M176 544C96.5 544 32 479.5 32 400C32 336.6 73 282.8 129.9 263.5C128.6 255.8 128 248 128 240C128 160.5 192.5 96 272 96C327.4 96 375.5 127.3 399.6 173.1C413.8 164.8 430.4 160 448 160C501 160 544 203 544 256C544 271.7 540.2 286.6 533.5 299.7C577.5 320 608 364.4 608 416C608 486.7 550.7 544 480 544L176 544zM337 255C327.6 245.6 312.4 245.6 303.1 255L231.1 327C221.7 336.4 221.7 351.6 231.1 360.9C240.5 370.2 255.7 370.3 265 360.9L296 329.9L296 432C296 445.3 306.7 456 320 456C333.3 456 344 445.3 344 432L344 329.9L375 360.9C384.4 370.3 399.6 370.3 408.9 360.9C418.2 351.5 418.3 336.3 408.9 327L336.9 255z" />
+                    </svg>
+                </div>
+
+                <h3>Arrastra y suelta tus archivos aquí</h3>
+                <p>O haz clic para explorar en tu equipo (.xml o .zip)</p>
+                <span class="file-limits">
+                    Soporta múltiples XMLs o carpetas comprimidas en ZIP
+                </span>
+            </div>
+
+            <!-- Selected Files Area (Hidden by default) -->
+            <div class="selected-files-container" id="files-container" style="display: none;">
+                <div class="files-header">
+                    <h4><i class="fa-solid fa-list-check"></i> Archivos seleccionados (<span id="file-count">0</span>)
+                    </h4>
+                    <button class="btn-clear" id="btn-clear"><i class="fa-solid fa-trash-can"></i> Limpiar</button>
+                </div>
+                <ul class="files-list" id="files-list"></ul>
+
+                <button class="btn-convert" id="btn-convert">
+                    <svg class="btn-icon-convert" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640"
+                        aria-hidden="true">
+
+                        <path fill="currentColor"
+                            d="M128.5 64C93.2 64 64.5 92.7 64.5 128L64.5 512C64.5 547.3 93.2 576 128.5 576L384.5 576C419.8 576 448.5 547.3 448.5 512L448.5 416L526.6 416L495.6 447C486.2 456.4 486.2 471.6 495.6 480.9C505 490.2 520.2 490.3 529.5 480.9L601.5 408.9C610.9 399.5 610.9 384.3 601.5 375L529.5 303C520.1 293.6 504.9 293.6 495.6 303C486.3 312.4 486.2 327.6 495.6 336.9L526.6 367.9L448.5 367.9L448.5 234.4C448.5 217.4 441.8 201.1 429.8 189.1L323.2 82.7C311.2 70.7 295 64 278 64L128.5 64zM390 240L296.5 240C283.2 240 272.5 229.3 272.5 216L272.5 122.5L390 240zM256.5 392C256.5 378.7 267.2 368 280.5 368L384.5 368L384.5 416L280.5 416C267.2 416 256.5 405.3 256.5 392z" />
+                    </svg>
+
+                    <span>Convertir a Excel</span>
+                </button>
+            </div>
+
+            <!-- Conversion Progress / Loading Area (Hidden by default) -->
+            <div class="progress-container" id="progress-container" style="display: none;">
+                <div class="spinner"></div>
+                <h4 id="progress-text">Procesando tus archivos XML...</h4>
+                <p>Esto puede tardar unos segundos dependiendo del volumen de comprobantes.</p>
+                <div class="progress-bar-bg">
+                    <div class="progress-bar-fill" id="progress-bar"></div>
+                </div>
+            </div>
+
+            <!-- Result Feedback Area (Hidden by default) -->
+            <div class="result-container" id="result-container" style="display: none;">
+                <div class="result-success-icon">
+                    <i class="fa-solid fa-circle-check"></i>
+                </div>
+                <h3>¡Conversión Completada con Éxito!</h3>
+                <p id="result-details">Se procesaron X archivos correctamente.</p>
+                <div class="result-actions">
+                    <a href="#" id="btn-download" class="btn-download">
+                        <svg class="btn-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640"
+                            aria-hidden="true">
+
+                            <path fill="currentColor"
+                                d="M352 96C352 78.3 337.7 64 320 64C302.3 64 288 78.3 288 96L288 306.7L246.6 265.3C234.1 252.8 213.8 252.8 201.3 265.3C188.8 277.8 188.8 298.1 201.3 310.6L297.3 406.6C309.8 419.1 330.1 419.1 342.6 406.6L438.6 310.6C451.1 298.1 451.1 277.8 438.6 265.3C426.1 252.8 405.8 252.8 393.3 265.3L352 306.7L352 96zM160 384C124.7 384 96 412.7 96 448L96 480C96 515.3 124.7 544 160 544L480 544C515.3 544 544 515.3 544 480L544 448C544 412.7 515.3 384 480 384L433.1 384L376.5 440.6C345.3 471.8 294.6 471.8 263.4 440.6L206.9 384L160 384zM464 440C477.3 440 488 450.7 488 464C488 477.3 477.3 488 464 488C450.7 488 440 477.3 440 464C440 450.7 450.7 440 464 440z" />
+                        </svg>
+
+                        <span>Descargar Excel (.xlsx)</span>
+                    </a>
+                    <button id="btn-restart" class="btn-restart">
+                        <svg class="btn-icon-convert" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640"
+                            aria-hidden="true">
+
+                            <path fill="currentColor"
+                                d="M544.1 256L552 256C565.3 256 576 245.3 576 232L576 88C576 78.3 570.2 69.5 561.2 65.8C552.2 62.1 541.9 64.2 535 71L483.3 122.8C439 86.1 382 64 320 64C191 64 84.3 159.4 66.6 283.5C64.1 301 76.2 317.2 93.7 319.7C111.2 322.2 127.4 310 129.9 292.6C143.2 199.5 223.3 128 320 128C364.4 128 405.2 143 437.7 168.3L391 215C384.1 221.9 382.1 232.2 385.8 241.2C389.5 250.2 398.3 256 408 256L544.1 256zM573.5 356.5C576 339 563.8 322.8 546.4 320.3C529 317.8 512.7 330 510.2 347.4C496.9 440.4 416.8 511.9 320.1 511.9C275.7 511.9 234.9 496.9 202.4 471.6L249 425C255.9 418.1 257.9 407.8 254.2 398.8C250.5 389.8 241.7 384 232 384L88 384C74.7 384 64 394.7 64 408L64 552C64 561.7 69.8 570.5 78.8 574.2C87.8 577.9 98.1 575.8 105 569L156.8 517.2C201 553.9 258 576 320 576C449 576 555.7 480.6 573.4 356.5z" />
+                        </svg>
+
+                        <span>Convertir más archivos</span>
+                    </button>
+                </div>
+            </div>
+        </main>
+
+        <!-- Information / Features Grid -->
+        <section class="features-grid">
+            <div class="feature-card">
+                <svg class="feature-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" aria-hidden="true">
+
+                    <path fill="currentColor"
+                        d="M256 160L256 224L384 224L384 160C384 124.7 355.3 96 320 96C284.7 96 256 124.7 256 160zM192 224L192 160C192 89.3 249.3 32 320 32C390.7 32 448 89.3 448 160L448 224C483.3 224 512 252.7 512 288L512 512C512 547.3 483.3 576 448 576L192 576C156.7 576 128 547.3 128 512L128 288C128 252.7 156.7 224 192 224z" />
+                </svg>
+
+                <h3>Privacidad 100% Segura</h3>
+
+                <p>
+                    Tus XMLs se procesan directamente en memoria en nuestro servidor para generar el Excel y nunca se
+                    guardan en disco ni se comparten con terceros.
+                </p>
+            </div>
+            <div class="feature-card">
+                <svg class="feature-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" aria-hidden="true">
+
+                    <path fill="currentColor"
+                        d="M480 96C515.3 96 544 124.7 544 160L544 480C544 515.3 515.3 544 480 544L160 544L153.5 543.7C121.2 540.4 96 513.1 96 480L96 160C96 124.7 124.7 96 160 96L480 96zM160 384L160 480L288 480L288 384L160 384zM352 384L352 480L480 480L480 384L352 384zM160 320L288 320L288 224L160 224L160 320zM352 320L480 320L480 224L352 224L352 320z" />
+                </svg>
+
+                <h3>Hojas Separadas</h3>
+
+                <p>
+                    Genera hojas separadas en el mismo archivo de Excel para facturas normales (Emisión) y retenciones
+                    fiscales, manteniendo todo perfectamente organizado.
+                </p>
+            </div>
+            <div class="feature-card">
+                <svg class="feature-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" aria-hidden="true">
+
+                    <path fill="currentColor"
+                        d="M434.8 54.1C446.7 62.7 451.1 78.3 445.7 91.9L367.3 288L512 288C525.5 288 537.5 296.4 542.1 309.1C546.7 321.8 542.8 336 532.5 344.6L244.5 584.6C233.2 594 217.1 594.5 205.2 585.9C193.3 577.3 188.9 561.7 194.3 548.1L272.7 352L128 352C114.5 352 102.5 343.6 97.9 330.9C93.3 318.2 97.2 304 107.5 295.4L395.5 55.4C406.8 46 422.9 45.5 434.8 54.1z" />
+                </svg>
+
+                <h3>Velocidad Increíble</h3>
+
+                <p>
+                    Procesa cientos de XMLs en milisegundos gracias a nuestro motor optimizado en .NET 9. Ideal para
+                    cierres contables mensuales.
+                </p>
+            </div>
+        </section>
+
+        <section class="faq-section">
+            <h2 class="faq-title">Preguntas frecuentes</h2>
+
+            <div class="faq-list">
+                <details class="faq-item">
+                    <summary>¿Qué es un CFDI?</summary>
+                    <p>
+                        Un CFDI (Comprobante Fiscal Digital por Internet) es el formato de
+                        factura electrónica utilizado en México y validado por el SAT. Se
+                        emite en formato XML e incluye información como el emisor, el
+                        receptor, los conceptos facturados, montos, impuestos y un sello
+                        digital que garantiza su autenticidad.
+                    </p>
+                </details>
+
+                <details class="faq-item">
+                    <summary>¿Es seguro subir mis archivos XML a este sitio?</summary>
+                    <p>
+                        Sí. Tus archivos se procesan en memoria, únicamente durante el
+                        tiempo necesario para generar tu Excel, y no se almacenan en
+                        ningún servidor ni se comparten con terceros. Una vez que
+                        descargas tu archivo, la información se descarta. Puedes leer más
+                        en nuestro <a href="/Pages/privacidad.html">aviso de privacidad</a>.
+                    </p>
+                </details>
+
+                <details class="faq-item">
+                    <summary>¿Qué diferencia hay entre un CFDI de Emisión y uno de Retenciones?</summary>
+                    <p>
+                        Los CFDI de Emisión corresponden a ingresos, egresos, pagos o
+                        traslados (facturas normales de compra-venta de bienes o
+                        servicios). Los CFDI de Retenciones e información de pagos
+                        documentan impuestos retenidos, como el ISR o IVA retenido a
+                        personas físicas por plataformas digitales o clientes. Esta
+                        herramienta detecta automáticamente de qué tipo es cada XML y lo
+                        coloca en la hoja de Excel correspondiente.
+                    </p>
+                </details>
+
+                <details class="faq-item">
+                    <summary>¿Puedo subir muchos archivos XML a la vez?</summary>
+                    <p>
+                        Sí, puedes arrastrar múltiples archivos XML individuales o subir
+                        un solo archivo ZIP que los contenga todos. El conversor procesa
+                        cada archivo por separado y organiza los resultados en hojas de
+                        Excel independientes.
+                    </p>
+                </details>
+
+                <details class="faq-item">
+                    <summary>¿Qué versiones de CFDI soporta?</summary>
+                    <p>
+                        El conversor está preparado para procesar CFDI 3.3 y 4.0, tanto de
+                        Emisión como de Retenciones e información de pagos.
+                    </p>
+                </details>
+
+                <details class="faq-item">
+                    <summary>¿Tiene algún costo usar esta herramienta?</summary>
+                    <p>
+                        No, el conversor es completamente gratuito. El sitio se mantiene a
+                        través de publicidad, sin costo para el usuario.
+                    </p>
+                </details>
+
+                <details class="faq-item">
+                    <summary>¿Los datos que obtengo son válidos para mi declaración fiscal?</summary>
+                    <p>
+                        El Excel generado es una herramienta de organización y consulta.
+                        Te recomendamos siempre validar la información con tu contador o
+                        asesor fiscal antes de usarla en tu declaración, ya que este sitio
+                        no ofrece asesoría fiscal ni tiene relación oficial con el SAT.
+                    </p>
+                </details>
+            </div>
+        </section>
+
+        <!-- ADSENSE CONTAINER: MIDDLE BANNER -->
+        <div class="adsense-placeholder middle-banner">
+            <div class="adsense-label">PUBLICIDAD (Google AdSense - Banner Adaptable)</div>
+            <!-- Reemplaza esta caja por tu código de anuncio de Google AdSense -->
+            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+                data-ad-slot="YYYYYYYYYY" data-ad-format="auto" data-full-width-responsive="true"></ins>
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+    </div>
+
+
+
+    <!-- Footer Section -->
+    <footer class="app-footer">
+        <div class="footer-content">
+            <p>&copy; 2026 XML2Excel. Todos los derechos reservados. Desarrollado con tecnología ASP.NET Core 9 y
+                MiniExcel.</p>
+            <p class="footer-disclaimer">
+                Este sitio es una herramienta independiente y no tiene relación oficial con el SAT.
+                <a href="/Pages/privacidad.html">Aviso de privacidad</a> · <a href="/Pages/terminos.html">Términos de
+                    uso</a>
+            </p>
+        </div>
+    </footer>
+
+    <!-- Custom JS -->
+    <script type="module" src="/Scripts/Main.js"></script>
+</body>
+
+</html>
