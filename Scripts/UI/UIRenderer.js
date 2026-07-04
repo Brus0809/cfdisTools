@@ -29,7 +29,8 @@ if (!errorBanner) {
     errorBanner.style.border = '1px solid #fecaca';
     errorBanner.style.borderRadius = '8px';
     errorBanner.style.padding = '12px 16px';
-    errorBanner.style.marginBottom = '12px';
+    errorBanner.style.marginBottom = '5px';
+    errorBanner.style.marginTop = '10px';
     errorBanner.style.fontSize = '14px';
     filesContainer.parentNode.insertBefore(errorBanner, filesContainer);
 }

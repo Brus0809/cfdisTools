@@ -88,10 +88,7 @@ body {
     background: var(--bg-secondary);
     border: 1px dashed var(--border-color);
     border-radius: 6px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    display: block;
     min-height: 110px;
     text-align: center;
 }
