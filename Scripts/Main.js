@@ -36,6 +36,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const btnClear = document.getElementById('btn-clear');
     const btnRestart = document.getElementById('btn-restart');
 
+    const chkValidateSat = document.getElementById('chk-validate-sat');
+
     let activeRequest = null; // referencia al XHR en curso, evita doble envío
 
     // ---------- Selección de archivos ----------
@@ -105,8 +107,9 @@ document.addEventListener('DOMContentLoaded', () => {
         updateProgress(0, 'Subiendo archivos...');
 
         const files = getSelectedFiles().map(f => f.file);
+        const shouldValidateSat = chkValidateSat.checked;
 
-        activeRequest = convertFiles(files, {
+        activeRequest = convertFiles(files, shouldValidateSat, {
             onProgress: (percent) => {
                 updateProgress(
                     percent,

@@ -3,8 +3,8 @@
 // archivos con progreso real y devolver el blob resultante o el error.
 // No toca el DOM ni conoce el estado de selectedFiles.
 
-// const ENDPOINT = 'https://localhost:7163/api/cfdiconverter/convert'; 
-const ENDPOINT = 'https://cfdistoolsback.onrender.com/api/cfdiconverter/convert';
+const ENDPOINT = 'https://localhost:7163/api/cfdiconverter/convert'; 
+//const ENDPOINT = 'https://cfdistoolsback.onrender.com/api/cfdiconverter/convert';
 
 const DEFAULT_FILENAME = 'CFDI_Excel_Convertido.xlsx';
 
@@ -27,9 +27,10 @@ function extractFileName(xhr) {
  * @param {{ onProgress?: (percent:number)=>void, onSuccess:(result:{blob:Blob, fileName:string})=>void, onError:(message:string)=>void }} callbacks
  * @returns {XMLHttpRequest} referencia al request, útil para abortarlo
  */
-export function convertFiles(files, { onProgress, onSuccess, onError }) {
+export function convertFiles(files, validateSat, { onProgress, onSuccess, onError }) {
     const formData = new FormData();
     files.forEach(file => formData.append('files', file));
+    formData.append('validateSat', validateSat);
 
     const xhr = new XMLHttpRequest();
     xhr.open('POST', ENDPOINT, true);
