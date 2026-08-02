@@ -58,3 +58,16 @@
     .faq-item a {
         color: var(--accent-hover);
     }
+
+    .faq-item ul {
+        margin: 10px 0;
+        padding-left: 20px;
+        font-size: 0.85rem;
+        line-height: 1.6;
+        color: var(--text-muted);
+    }
+
+    .faq-item li {
+        margin-bottom: 8px;
+        line-height: 1.5;
+    }

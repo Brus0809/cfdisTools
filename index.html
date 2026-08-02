@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Convertidor de CFDI a Excel | XML2Excel</title>
     <meta name="description"
-        content="Convierte tus archivos XML de CFDI 3.3 y 4.0 a Excel. Procesa comprobantes de emisión, pagos, retenciones y nóminas de forma rápida y gratuita.">
+        content="Convierte tus archivos XML de CFDI 3.3 y 4.0 a Excel. Procesa comprobantes de emisión, pagos, retenciones, nóminas y cartas porte de forma rápida y gratuita.">
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="CSS/main.css">
@@ -211,7 +211,7 @@
 
                 <p>
                     Organiza automáticamente tus CFDI en hojas separadas de Excel según su tipo:
-                    Emisión, Retenciones y Nómina.
+                    Emisión, Retenciones, Nómina y Carta Porte.
                 </p>
             </div>
             <div class="feature-card">
@@ -243,7 +243,8 @@
                 </p>
                 <p>
                     Al convertir tus <strong>archivos XML a Excel</strong>, obtienes una ventaja enorme: puedes filtrar,
-                    sumar y analizar tus ingresos, gastos, pagos, retenciones y <strong>nóminas</strong> con la
+                    sumar y analizar tus ingresos, gastos, pagos, retenciones, nóminas y <strong>cartas porte</strong>
+                    con la
                     facilidad que ofrecen las hojas de cálculo.
                     Esto es especialmente útil durante el cierre contable mensual o la declaración anual.
                 </p>
@@ -261,7 +262,8 @@
                         instantáneamente la información (sin guardarla en bases de datos, garantizando tu privacidad).
                     </li>
                     <li><strong>Descarga y analiza:</strong> Obtendrás un único archivo de Excel con hojas separadas
-                        para Emisión (Ingresos/Gastos), Retenciones y <strong>Nóminas</strong>. ¡Listo para tu
+                        para Emisión (Ingresos/Gastos), Retenciones, Nóminas y <strong>Cartas Porte</strong>. ¡Listo
+                        para tu
                         contabilidad!</li>
                 </ol>
 
@@ -307,16 +309,24 @@
                 </details>
 
                 <details class="faq-item">
-                    <summary>¿Qué diferencia hay entre un CFDI de Emisión, Retenciones y Nómina?</summary>
+                    <summary>¿Qué diferencia hay entre un CFDI de Emisión, Retenciones, Nómina y Carta Porte?</summary>
                     <p>
-                        Los <strong>CFDI de Emisión</strong> corresponden a ingresos, egresos, pagos o
-                        traslados (facturas normales de compra-venta de bienes o
-                        servicios). Los <strong>CFDI de Retenciones</strong> e información de pagos
-                        documentan impuestos retenidos, como el ISR o IVA retenido a
-                        personas físicas. Finalmente, los <strong>CFDI de Nómina</strong> son los recibos de pago
-                        que los empleadores entregan a sus trabajadores. Esta
-                        herramienta detecta automáticamente de qué tipo es cada XML y lo
-                        coloca en una hoja de Excel independiente para mantener todo organizado.
+                        Los <strong>CFDI de Emisión</strong> corresponden a comprobantes de ingreso, egreso, pago o
+                        traslado (facturas utilizadas para documentar operaciones comerciales).
+                        Los <strong>CFDI de Retenciones</strong> e información de pagos documentan impuestos
+                        retenidos, como ISR o IVA retenido. Los <strong>CFDI de Nómina</strong> son los
+                        comprobantes de pago que los empleadores emiten a sus trabajadores.
+                        Por su parte, el <strong>CFDI con complemento Carta Porte</strong> se utiliza para
+                        amparar el traslado de mercancías e incluye información adicional sobre
+                        el transporte, como ubicaciones, mercancías, vehículos, operadores y
+                        otros datos logísticos.
+                    </p>
+                    <p>
+                        Debido a la gran cantidad de información que contiene la Carta Porte,
+                        esta herramienta la detecta automáticamente y genera un <strong>archivo de
+                            Excel independiente</strong>. Si la conversión incluye CFDI de Carta Porte y
+                        otros tipos de CFDI, se genera un archivo <strong>ZIP</strong> con los Excel
+                        organizados por tipo de comprobante para facilitar su consulta.
                     </p>
                 </details>
 
@@ -334,7 +344,7 @@
                     <summary>¿Qué versiones de CFDI soporta?</summary>
                     <p>
                         El conversor procesa CFDI 3.3 y 4.0, incluyendo comprobantes de emisión,
-                        pagos, retenciones y nóminas, según el tipo de archivo XML.
+                        pagos, retenciones, nóminas y cartas porte, según el tipo de archivo XML.
                     </p>
                 </details>
 
@@ -353,6 +363,31 @@
                         Te recomendamos siempre validar la información con tu contador o
                         asesor fiscal antes de usarla en tu declaración, ya que este sitio
                         no ofrece asesoría fiscal ni tiene relación oficial con el SAT.
+                    </p>
+                </details>
+
+                <details class="faq-item">
+                    <summary>¿Qué información agrega la consulta de estatus ante el SAT?</summary>
+                    <p>
+                        Si habilitas la opción <strong>"Consultar estatus de validación ante el SAT"</strong>
+                        antes de realizar la conversión, el archivo de Excel incluirá columnas adicionales
+                        con la información obtenida del servicio de consulta del SAT.
+                    </p>
+
+                    <p>
+                        Entre los datos que pueden incorporarse se encuentran:
+                    </p>
+
+                    <ul>
+                        <li><strong>Estatus SAT:</strong> Indica si el CFDI se encuentra vigente o cancelado.</li>
+                        <li><strong>Es Cancelable:</strong> Muestra la condición de cancelación del comprobante.</li>
+                        <li><strong>Estatus de Cancelación:</strong> Indica el estado del proceso de cancelación cuando
+                            aplica.</li>
+                    </ul>
+
+                    <p>
+                        Esta información facilita la validación de grandes volúmenes de CFDI sin necesidad de consultar
+                        cada comprobante de forma individual en el portal del SAT.
                     </p>
                 </details>
             </div>
