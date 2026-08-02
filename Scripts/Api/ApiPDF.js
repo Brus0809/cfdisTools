@@ -6,8 +6,8 @@
 //     PDFs, leyendo el Content-Type que devuelve el servidor.
 
 
-const ENDPOINT = 'https://localhost:7163/api/cfdiconverter/convert/pdf';
-// const ENDPOINT = 'https://cfdistoolsback.onrender.com/api/cfdiconverter/convert/pdf';
+// const ENDPOINT = 'https://localhost:7163/api/cfdiconverter/convert/pdf';
+const ENDPOINT = 'https://cfdistoolsback.onrender.com/api/cfdiconverter/convert/pdf';
 
 const DEFAULT_PDF_FILENAME = 'CFDI_Convertido.pdf';
 const DEFAULT_ZIP_FILENAME = 'CFDI_PDFs_Convertidos.zip';
